@@ -1,0 +1,15 @@
+PORTAFOLIO NOEMI CAPCHA ADVINCULA
+Curso: Proyecto de aplicación profesional
+
+1. Abrir la carpeta del proyecto con NetBeans.
+2. Usar JDK 17 o superior.
+3. Configurar Apache Tomcat 11.
+4. Ejecutar el proyecto Maven Web.
+
+LOGIN ADMIN:
+Usuario: noemi
+Contraseña: Noemi2026!
+
+ESTRUCTURA:
+Web Pages: META-INF, WEB-INF, assets y los JSP solicitados.
+Source Packages: controller, dao, model, util.

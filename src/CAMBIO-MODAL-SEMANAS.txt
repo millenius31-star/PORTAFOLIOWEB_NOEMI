@@ -1,0 +1,22 @@
+CORRECCIÓN REALIZADA
+
+Problema:
+Al abrir una semana, el cuadro emergente quedaba debajo del menú superior
+y su parte de arriba aparecía cortada.
+
+Solución:
+1. Los modales de semanas ahora se mueven directamente al <body> mediante JavaScript.
+2. El modal usa un z-index superior al menú.
+3. El cuadro se centra dentro del viewport.
+4. Su altura máxima se ajusta a la pantalla y el contenido interno puede desplazarse.
+5. Se actualizó la versión de CSS y JS para evitar caché.
+
+Archivos modificados:
+- main/webapp/assets/js/app.js
+- main/webapp/assets/css/style.css
+- JSP que cargan style.css y app.js
+
+Después de copiarlo a NetBeans:
+- Clean and Build
+- Reiniciar Tomcat
+- Ejecutar nuevamente
