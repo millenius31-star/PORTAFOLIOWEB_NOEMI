@@ -29,31 +29,17 @@
       <div class="week-dialog-role-grid">
         <section class="upload-role-card professor-role">
           <div class="role-title-row"><div class="role-icon">👩‍🏫</div><div><span>PROFESOR</span><h3>Material de clase</h3></div></div>
-          <form class="role-upload-form" method="post" action="${pageContext.request.contextPath}/archivo" enctype="multipart/form-data">
-            <input type="hidden" name="accion" value="subir"><input type="hidden" name="origen" value="portafolio">
-            <input type="hidden" name="semana" value="15"><input type="hidden" name="tipo" value="PROFESOR">
-            <label class="role-file-picker"><span>📎 Seleccionar uno o varios archivos del profesor</span><input type="file" name="archivo" multiple required></label>
-            <small class="multi-file-note">Puedes seleccionar varios archivos a la vez.</small>
-            <button class="role-upload-button professor-button" type="submit">Subir archivos</button>
-          </form>
           <div class="role-file-list">
           <% boolean hp=false; for(ArchivoSemana a:semana.getArchivos()){ if("PROFESOR".equalsIgnoreCase(a.getTipo())){ hp=true; %>
-            <a class="role-file-item" href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>"><span>📄</span><span><%=a.getNombreOriginal()%></span><b>↓</b></a>
+            <div class="role-file-item evidence-item"><span>📄</span><span class="evidence-name"><%=a.getNombreOriginal()%></span><div class="evidence-actions"><a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=ver" target="_blank" rel="noopener">👁 Ver</a><a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=descargar">↓ Descargar</a></div></div>
           <% } } if(!hp){ %><div class="role-empty">Sin archivos del profesor.</div><% } %>
           </div>
         </section>
         <section class="upload-role-card student-role">
           <div class="role-title-row"><div class="role-icon">🎓</div><div><span>ALUMNO</span><h3>Mis evidencias</h3></div></div>
-          <form class="role-upload-form" method="post" action="${pageContext.request.contextPath}/archivo" enctype="multipart/form-data">
-            <input type="hidden" name="accion" value="subir"><input type="hidden" name="origen" value="portafolio">
-            <input type="hidden" name="semana" value="15"><input type="hidden" name="tipo" value="ALUMNO">
-            <label class="role-file-picker"><span>📎 Seleccionar uno o varios archivos del alumno</span><input type="file" name="archivo" multiple required></label>
-            <small class="multi-file-note">Puedes seleccionar varios archivos a la vez.</small>
-            <button class="role-upload-button student-button" type="submit">Subir evidencias</button>
-          </form>
           <div class="role-file-list">
           <% boolean ha=false; for(ArchivoSemana a:semana.getArchivos()){ if("ALUMNO".equalsIgnoreCase(a.getTipo()) || "GENERAL".equalsIgnoreCase(a.getTipo())){ ha=true; %>
-            <a class="role-file-item" href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>"><span>📄</span><span><%=a.getNombreOriginal()%></span><b>↓</b></a>
+            <div class="role-file-item evidence-item"><span>📄</span><span class="evidence-name"><%=a.getNombreOriginal()%></span><div class="evidence-actions"><a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=ver" target="_blank" rel="noopener">👁 Ver</a><a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=descargar">↓ Descargar</a></div></div>
           <% } } if(!ha){ %><div class="role-empty">Sin evidencias del alumno.</div><% } %>
           </div>
         </section>

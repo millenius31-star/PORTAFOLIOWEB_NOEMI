@@ -11,6 +11,7 @@ import model.Semana;
 import util.WebUtil;
 
 import java.io.IOException;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -34,8 +35,14 @@ public class ArchivoController extends HttpServlet {
         }
 
         String nombre = URLEncoder.encode(a.getNombreOriginal(), StandardCharsets.UTF_8).replace("+", "%20");
-        resp.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + nombre);
-        resp.setContentType("application/octet-stream");
+        boolean ver = "ver".equalsIgnoreCase(req.getParameter("accion"));
+        String mime = Files.probeContentType(archivo);
+        if (mime == null) mime = URLConnection.guessContentTypeFromName(a.getNombreOriginal());
+        // Los tipos seguros se visualizan en el navegador; otros se descargan.
+        boolean visualizable = mime != null && (mime.equals("application/pdf") || mime.startsWith("image/") || mime.equals("text/plain"));
+        resp.setHeader("X-Content-Type-Options", "nosniff");
+        resp.setHeader("Content-Disposition", (ver && visualizable ? "inline" : "attachment") + "; filename*=UTF-8''" + nombre);
+        resp.setContentType(ver && visualizable ? mime : "application/octet-stream");
         resp.setContentLengthLong(Files.size(archivo));
         Files.copy(archivo, resp.getOutputStream());
     }
@@ -45,6 +52,9 @@ public class ArchivoController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String accion = WebUtil.texto(req, "accion");
         String origen = WebUtil.texto(req, "origen");
+
+        // Solo el administrador puede modificar archivos. La consulta pública es GET.
+        if (!WebUtil.esAdmin(req)) { resp.sendError(403); return; }
 
         // Eliminar sigue siendo una acción exclusiva del administrador.
         if ("eliminar".equals(accion)) {

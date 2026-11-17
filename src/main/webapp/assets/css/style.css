@@ -2012,3 +2012,20 @@ body.week-modal-open .nav{
     0%,100%{transform:translateY(0);}
     50%{transform:translateY(-12px);}
 }
+
+/* Consulta de evidencias: sin formularios de carga en las páginas públicas */
+.evidence-item{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;gap:9px!important;align-items:center!important}
+.evidence-name{overflow-wrap:anywhere;min-width:0}
+.evidence-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:9px;margin-top:6px}
+.evidence-actions a{display:inline-flex;align-items:center;justify-content:center;flex:1;min-width:100px;padding:10px 12px;border-radius:11px;text-decoration:none!important;background:#fff0f6;color:#a83565!important;border:1px solid #f3a8c8;font-size:13px;font-weight:700}
+.evidence-actions a:last-child{background:linear-gradient(100deg,#ef5d95,#b673d1);color:white!important;border-color:transparent}
+.evidence-actions a:hover{filter:brightness(.96);transform:translateY(-1px)}
+
+/* Vista pública: archivos disponibles para ver y descargar */
+.ornate-file-row.evidence-item {display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:14px;border:1px solid #f4c6dc;border-radius:14px;background:#fff7fb;}
+.ornate-file-row .evidence-name {flex:1;min-width:120px;overflow-wrap:anywhere;color:#713b59;font-weight:600;}
+.ornate-file-row .evidence-actions {display:flex;gap:8px;flex-wrap:wrap;}
+.ornate-file-row .evidence-actions a {display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border-radius:10px;background:#e65b97;color:#fff;text-decoration:none;font-weight:700;}
+.ornate-file-row .evidence-actions a:last-child {background:#a967c7;}
+.ornate-file-row .evidence-actions a:hover {filter:brightness(.93);}
+@media(max-width:600px){.ornate-file-row .evidence-actions{width:100%;}.ornate-file-row .evidence-actions a{flex:1;}}

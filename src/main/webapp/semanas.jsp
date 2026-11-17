@@ -112,30 +112,18 @@
                             Guías, separatas, diapositivas, instrucciones, PDF, Word y otros materiales.
                         </p>
 
-                        <form class="ornate-upload-form" method="post"
-                              action="${pageContext.request.contextPath}/archivo"
-                              enctype="multipart/form-data">
-                            <input type="hidden" name="accion" value="subir">
-                            <input type="hidden" name="origen" value="portafolio">
-                            <input type="hidden" name="semana" value="<%=s.getNumero()%>">
-                            <input type="hidden" name="tipo" value="PROFESOR">
-
-                            <label class="ornate-file-picker">
-                                <span>📎 Seleccionar archivos del profesor</span>
-                                <small>Puedes elegir uno o varios archivos a la vez.</small>
-                                <input type="file" name="archivo" multiple required>
-                            </label>
-                            <button class="ornate-upload-btn" type="submit">Subir archivos del profesor</button>
-                        </form>
-
                         <div class="ornate-file-list">
                         <% boolean hayProfesor = false;
                            for (ArchivoSemana a : s.getArchivos()) {
                                if ("PROFESOR".equalsIgnoreCase(a.getTipo())) {
                                    hayProfesor = true; %>
-                            <a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>" class="ornate-file-row">
-                                <span>📄</span><span><%=a.getNombreOriginal()%></span><b>↓</b>
-                            </a>
+                            <div class="ornate-file-row evidence-item">
+                                <span>📄</span><span class="evidence-name"><%=a.getNombreOriginal()%></span>
+                                <div class="evidence-actions">
+                                    <a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=ver" target="_blank" rel="noopener" aria-label="Ver <%=a.getNombreOriginal()%>">👁 Ver</a>
+                                    <a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=descargar" aria-label="Descargar <%=a.getNombreOriginal()%>">↓ Descargar</a>
+                                </div>
+                            </div>
                         <%     }
                            }
                            if (!hayProfesor) { %>
@@ -153,32 +141,18 @@
                             Tareas, prácticas, capturas, documentos y evidencias desarrolladas por el alumno.
                         </p>
 
-                        <form class="ornate-upload-form" method="post"
-                              action="${pageContext.request.contextPath}/archivo"
-                              enctype="multipart/form-data">
-                            <input type="hidden" name="accion" value="subir">
-                            <input type="hidden" name="origen" value="portafolio">
-                            <input type="hidden" name="semana" value="<%=s.getNumero()%>">
-                            <input type="hidden" name="tipo" value="ALUMNO">
-
-                            <label class="ornate-file-picker student-picker">
-                                <span>🎓 Seleccionar archivos del alumno</span>
-                                <small>Puedes elegir uno o varios archivos a la vez.</small>
-                                <input type="file" name="archivo" multiple required>
-                            </label>
-                            <button class="ornate-upload-btn student-upload-btn" type="submit">
-                                Subir evidencias del alumno
-                            </button>
-                        </form>
-
                         <div class="ornate-file-list">
                         <% boolean hayAlumno = false;
                            for (ArchivoSemana a : s.getArchivos()) {
                                if ("ALUMNO".equalsIgnoreCase(a.getTipo()) || "GENERAL".equalsIgnoreCase(a.getTipo())) {
                                    hayAlumno = true; %>
-                            <a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>" class="ornate-file-row">
-                                <span>📄</span><span><%=a.getNombreOriginal()%></span><b>↓</b>
-                            </a>
+                            <div class="ornate-file-row evidence-item">
+                                <span>📄</span><span class="evidence-name"><%=a.getNombreOriginal()%></span>
+                                <div class="evidence-actions">
+                                    <a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=ver" target="_blank" rel="noopener" aria-label="Ver <%=a.getNombreOriginal()%>">👁 Ver</a>
+                                    <a href="${pageContext.request.contextPath}/archivo?id=<%=a.getId()%>&amp;accion=descargar" aria-label="Descargar <%=a.getNombreOriginal()%>">↓ Descargar</a>
+                                </div>
+                            </div>
                         <%     }
                            }
                            if (!hayAlumno) { %>
@@ -190,7 +164,7 @@
 
                 <div class="ornate-dialog-footer">
                     <button type="button" class="ornate-close-secondary" data-week-close>Cerrar</button>
-                    <span>Los archivos se guardan separados por semana, profesor y alumno.</span>
+                    <span>Consulta o descarga los documentos publicados en cada semana.</span>
                 </div>
             </div>
         </div>
